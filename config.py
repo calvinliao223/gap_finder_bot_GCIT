@@ -13,6 +13,13 @@ import warnings
 # Load environment variables from .env file
 load_dotenv()
 
+# Check if running on Streamlit Cloud
+try:
+    import streamlit as st
+    STREAMLIT_CLOUD = hasattr(st, 'secrets')
+except ImportError:
+    STREAMLIT_CLOUD = False
+
 class SecurityConfig:
     """Secure configuration management with API key validation"""
     
@@ -38,60 +45,65 @@ class SecurityConfig:
             warnings.warn(warning_msg, UserWarning)
             self.logger.warning(warning_msg)
     
-    @property
-    def openai_api_key(self) -> Optional[str]:
-        """Get OpenAI API key from environment"""
-        key = os.getenv('OPENAI_API_KEY')
-        if key and key != 'your_openai_api_key_here':
+    def _get_key(self, key_name: str, default_placeholder: str = None) -> Optional[str]:
+        """Get API key from Streamlit secrets or environment variables"""
+        # Try Streamlit secrets first (for cloud deployment)
+        if STREAMLIT_CLOUD:
+            try:
+                import streamlit as st
+                if hasattr(st, 'secrets') and key_name in st.secrets:
+                    key = st.secrets[key_name]
+                    if key and (not default_placeholder or key != default_placeholder):
+                        return key
+            except Exception:
+                pass
+
+        # Fallback to environment variables
+        key = os.getenv(key_name)
+        if key and (not default_placeholder or key != default_placeholder):
             return key
         return None
+
+    @property
+    def openai_api_key(self) -> Optional[str]:
+        """Get OpenAI API key from Streamlit secrets or environment"""
+        return self._get_key('OPENAI_API_KEY', 'your_openai_api_key_here')
     
     @property
     def anthropic_api_key(self) -> Optional[str]:
-        """Get Anthropic API key from environment"""
-        key = os.getenv('ANTHROPIC_API_KEY')
-        if key and key != 'your_anthropic_api_key_here':
-            return key
-        return None
-    
+        """Get Anthropic API key from Streamlit secrets or environment"""
+        return self._get_key('ANTHROPIC_API_KEY', 'your_anthropic_api_key_here')
+
     @property
     def google_api_key(self) -> Optional[str]:
-        """Get Google API key from environment"""
-        key = os.getenv('GOOGLE_API_KEY')
-        if key and key != 'your_google_api_key_here':
-            return key
-        return None
-    
+        """Get Google API key from Streamlit secrets or environment"""
+        return self._get_key('GOOGLE_API_KEY', 'your_google_api_key_here')
+
     @property
     def semantic_scholar_api_key(self) -> Optional[str]:
-        """Get Semantic Scholar API key from environment"""
-        key = os.getenv('SEMANTIC_SCHOLAR_API_KEY')
-        if key and key != 'your_semantic_scholar_api_key_here':
-            return key
-        return None
-    
+        """Get Semantic Scholar API key from Streamlit secrets or environment"""
+        return self._get_key('SEMANTIC_SCHOLAR_API_KEY', 'your_semantic_scholar_api_key_here')
+
     @property
     def crossref_api_key(self) -> Optional[str]:
-        """Get Crossref API key from environment"""
-        key = os.getenv('CROSSREF_API_KEY')
-        if key and key != 'your_crossref_api_key_here':
-            return key
-        return None
+        """Get Crossref API key from Streamlit secrets or environment"""
+        return self._get_key('CROSSREF_API_KEY', 'your_crossref_api_key_here')
     
     @property
     def preferred_ai_provider(self) -> str:
         """Get preferred AI provider"""
-        return os.getenv('PREFERRED_AI_PROVIDER', 'openai')
-    
+        return self._get_key('PREFERRED_AI_PROVIDER') or 'openai'
+
     @property
     def debug_mode(self) -> bool:
         """Get debug mode setting"""
-        return os.getenv('DEBUG_MODE', 'false').lower() == 'true'
-    
+        value = self._get_key('DEBUG_MODE') or 'false'
+        return str(value).lower() == 'true'
+
     @property
     def log_level(self) -> str:
         """Get log level"""
-        return os.getenv('LOG_LEVEL', 'INFO').upper()
+        return (self._get_key('LOG_LEVEL') or 'INFO').upper()
     
     @property
     def semantic_scholar_rate_limit(self) -> float:
