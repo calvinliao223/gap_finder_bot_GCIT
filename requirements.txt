@@ -1,0 +1,25 @@
+# Research Gap Finder - Integrated Requirements
+# Combines dependencies from both projects
+
+# Core Framework
+streamlit>=1.28.0
+pandas>=2.0.0
+
+# LLM Providers
+openai>=1.3.0
+anthropic>=0.7.0
+google-generativeai>=0.3.0
+
+# API and Web Requests
+requests>=2.31.0
+tenacity>=8.2.0  # For retry logic
+
+# Data Export
+pyyaml>=6.0
+
+# Environment and Configuration
+python-dotenv>=1.0.0
+
+# Optional dependencies for enhanced features
+# redis>=4.5.0  # For caching (optional)
+# prometheus-client>=0.16.0  # For monitoring (optional)

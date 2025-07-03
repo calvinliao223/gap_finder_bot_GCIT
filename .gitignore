@@ -1,0 +1,282 @@
+# ===================================
+# Research Gap Finder - Security .gitignore
+# ===================================
+
+# ===== CRITICAL SECURITY FILES =====
+# Environment files containing API keys and secrets
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+*.env
+env.txt
+secrets.txt
+config.ini
+settings.ini
+
+# API Keys and Authentication
+api_keys.txt
+api_keys.json
+api_keys.yaml
+credentials.json
+credentials.txt
+auth_config.py
+secrets.py
+keys.py
+
+# Database files that might contain sensitive data
+*.db
+*.sqlite
+*.sqlite3
+database.db
+research_data.db
+
+# ===== PYTHON SPECIFIC =====
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+.ENV/
+myenv/
+research_env/
+
+# ===== STREAMLIT SPECIFIC =====
+# Streamlit secrets
+.streamlit/secrets.toml
+.streamlit/config.toml
+.streamlit/credentials.toml
+
+# ===== DATA AND CACHE FILES =====
+# Research data exports (may contain sensitive research)
+exports/
+data_exports/
+research_exports/
+*.xlsx
+*.csv
+*.json
+*.yaml
+research_data_*.zip
+research_data_*.json
+research_data_*.yaml
+research_data_*.xlsx
+
+# Cache files
+.cache/
+cache/
+*.cache
+.requests-cache
+paper_cache/
+search_cache/
+
+# Log files
+*.log
+logs/
+research_logs/
+api_logs/
+error_logs/
+
+# ===== SYSTEM FILES =====
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===== IDE AND EDITOR FILES =====
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ===== JUPYTER NOTEBOOKS =====
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+profile_default/
+ipython_config.py
+*.ipynb
+
+# ===== RESEARCH SPECIFIC =====
+# Research papers and documents (copyright protection)
+papers/
+documents/
+pdfs/
+research_papers/
+downloaded_papers/
+
+# User data and personal information
+user_data/
+personal_data/
+research_history/
+user_profiles/
+
+# Temporary research files
+temp/
+tmp/
+temporary/
+scratch/
+working/
+
+# ===== BACKUP FILES =====
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*~
+
+# ===== LARGE FILES =====
+# Large model files
+*.model
+*.pkl
+*.pickle
+models/
+checkpoints/
+
+# Large datasets
+datasets/
+data/
+raw_data/
+processed_data/
+
+# ===== DEPLOYMENT =====
+# Docker
+.dockerignore
+Dockerfile.local
+docker-compose.override.yml
+
+# Kubernetes
+*.kubeconfig
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# ===== CUSTOM RESEARCH FILES =====
+# Custom configuration files that might contain sensitive paths
+local_config.py
+local_settings.py
+development_config.py
+production_config.py
+
+# Research analysis results
+analysis_results/
+gap_analysis/
+paper_analysis/
+
+# User session data
+sessions/
+user_sessions/
+.session_data
+
+# ===== END OF .gitignore =====
