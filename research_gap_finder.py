@@ -628,7 +628,24 @@ class LLMProviderManager:
                     logger.warning("Google Generative AI package not installed")
         except Exception as e:
             logger.error(f"Failed to initialize Gemini: {e}")
-    
+
+        # Set default provider if any providers are available
+        if self.providers and not self.current_provider:
+            # Prefer Anthropic (most reliable), then OpenAI, then Gemini
+            preferred_order = ['anthropic', 'openai', 'gemini']
+            for provider in preferred_order:
+                if provider in self.providers:
+                    self.current_provider = provider
+                    logger.info(f"Set default provider to: {provider}")
+                    break
+
+        # Log initialization status
+        logger.info(f"Initialized {len(self.providers)} LLM providers: {list(self.providers.keys())}")
+        if self.current_provider:
+            logger.info(f"Default provider set to: {self.current_provider}")
+        else:
+            logger.warning("No LLM providers available - will use fallback responses")
+
     def get_available_providers(self) -> Dict[str, bool]:
         """Get status of all providers"""
         return {name: True for name in self.providers.keys()}
