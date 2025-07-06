@@ -75,106 +75,242 @@ st.set_page_config(
     page_title="Research Gap Finder",
     page_icon="🔬",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="auto",  # Auto-collapse on mobile
+    menu_items={
+        'Get Help': 'https://github.com/calvinliao223/gap_finder_bot_GCIT',
+        'Report a bug': 'https://github.com/calvinliao223/gap_finder_bot_GCIT/issues',
+        'About': """
+        # Research Gap Finder 🔬
+
+        AI-powered tool for discovering research opportunities across multiple academic databases.
+
+        **Features:**
+        - Multi-source paper search (Semantic Scholar, Crossref)
+        - Intelligent gap analysis with AI
+        - Comprehensive paper grading system
+        - Export capabilities (JSON, YAML, CSV, Excel)
+        - Cross-platform responsive design
+
+        **Optimized for:**
+        - 📱 Mobile devices (iOS/Android)
+        - 📟 Tablets (iPad/Android tablets)
+        - 💻 Desktop computers (Windows/Mac/Linux)
+        - 🌐 All major browsers (Chrome, Firefox, Safari, Edge)
+        """
+    }
 )
 
-# Professional CSS styling (enhanced from your version)
+# Professional CSS styling with responsive design
 st.markdown("""
 <style>
-    /* Main container styling */
+    /* ===== MOBILE-FIRST RESPONSIVE DESIGN ===== */
+
+    /* Base styles for mobile devices */
     .main .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        max-width: 1200px;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        max-width: 100%;
     }
-    
-    /* Header styling */
+
+    /* Header styling - Mobile first */
     .main-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        padding: 2rem;
-        border-radius: 15px;
-        margin-bottom: 2rem;
+        padding: 1.5rem 1rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
         text-align: center;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-    
+
     .main-header h1 {
         margin: 0;
-        font-size: 2.5rem;
+        font-size: 1.8rem;
         font-weight: 700;
+        line-height: 1.2;
     }
-    
+
     .main-header p {
         margin: 0.5rem 0 0 0;
-        font-size: 1.2rem;
+        font-size: 1rem;
         opacity: 0.95;
+        line-height: 1.4;
+    }
+
+    /* ===== TABLET STYLES (768px and up) ===== */
+    @media (min-width: 768px) {
+        .main .block-container {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            max-width: 1000px;
+        }
+
+        .main-header {
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .main-header h1 {
+            font-size: 2.2rem;
+        }
+
+        .main-header p {
+            font-size: 1.1rem;
+        }
+    }
+
+    /* ===== DESKTOP STYLES (1024px and up) ===== */
+    @media (min-width: 1024px) {
+        .main .block-container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            max-width: 1200px;
+        }
+
+        .main-header h1 {
+            font-size: 2.5rem;
+        }
+
+        .main-header p {
+            font-size: 1.2rem;
+        }
     }
     
-    /* Chat message styling */
+    /* ===== CHAT MESSAGE STYLING - RESPONSIVE ===== */
+
+    /* Mobile-first chat messages */
     .chat-message {
-        padding: 1.2rem 1.5rem;
-        margin: 1rem 0;
+        padding: 1rem;
+        margin: 0.8rem 0;
         border-radius: 12px;
         border-left: 4px solid;
         background: white;
         box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         transition: all 0.2s;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
-    
+
     .chat-message:hover {
         box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     }
-    
+
     .user-message {
         border-left-color: #3b82f6;
         background: linear-gradient(to right, #f0f9ff, #ffffff);
-        margin-left: 2rem;
+        margin-left: 0.5rem;
     }
-    
+
     .assistant-message {
         border-left-color: #059669;
         background: linear-gradient(to right, #f0fdf4, #ffffff);
-        margin-right: 2rem;
+        margin-right: 0.5rem;
+    }
+
+    /* Tablet styles for chat messages */
+    @media (min-width: 768px) {
+        .chat-message {
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .user-message {
+            margin-left: 1rem;
+        }
+
+        .assistant-message {
+            margin-right: 1rem;
+        }
+    }
+
+    /* Desktop styles for chat messages */
+    @media (min-width: 1024px) {
+        .user-message {
+            margin-left: 2rem;
+        }
+
+        .assistant-message {
+            margin-right: 2rem;
+        }
     }
     
-    /* Paper result styling */
+    /* ===== PAPER CARD STYLING - RESPONSIVE ===== */
+
+    /* Mobile-first paper cards */
     .paper-card {
         background: white;
-        padding: 1.5rem;
+        padding: 1rem;
         border-radius: 10px;
         border: 1px solid #e5e7eb;
         margin: 0.8rem 0;
         transition: all 0.2s;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
-    
+
     .paper-card:hover {
         border-color: #667eea;
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
     }
-    
+
     .paper-title {
         font-weight: 600;
         color: #1e293b;
-        font-size: 1.1rem;
+        font-size: 1rem;
         margin-bottom: 0.5rem;
+        line-height: 1.4;
     }
-    
+
     .paper-metadata {
         color: #64748b;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         line-height: 1.6;
     }
+
+    /* Tablet styles for paper cards */
+    @media (min-width: 768px) {
+        .paper-card {
+            padding: 1.3rem;
+        }
+
+        .paper-title {
+            font-size: 1.05rem;
+        }
+
+        .paper-metadata {
+            font-size: 0.9rem;
+        }
+    }
+
+    /* Desktop styles for paper cards */
+    @media (min-width: 1024px) {
+        .paper-card {
+            padding: 1.5rem;
+        }
+
+        .paper-title {
+            font-size: 1.1rem;
+        }
+    }
     
-    /* Enhanced Paper Card with Grading */
+    /* ===== ENHANCED PAPER CARD - RESPONSIVE ===== */
+
+    /* Mobile-first enhanced paper cards */
     .enhanced-paper-card {
         background: white;
-        padding: 1.5rem;
+        padding: 1rem;
         border-radius: 12px;
         border: 1px solid #e5e7eb;
-        margin: 1rem 0;
+        margin: 0.8rem 0;
         transition: all 0.3s;
         box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .enhanced-paper-card:hover {
@@ -183,13 +319,31 @@ st.markdown("""
         transform: translateY(-2px);
     }
 
+    /* Tablet styles for enhanced paper cards */
+    @media (min-width: 768px) {
+        .enhanced-paper-card {
+            padding: 1.3rem;
+            margin: 1rem 0;
+        }
+    }
+
+    /* Desktop styles for enhanced paper cards */
+    @media (min-width: 1024px) {
+        .enhanced-paper-card {
+            padding: 1.5rem;
+        }
+    }
+
+    /* Paper header - responsive */
     .paper-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
         padding-bottom: 0.5rem;
         border-bottom: 1px solid #f1f5f9;
+        flex-wrap: wrap;
+        gap: 0.5rem;
     }
 
     .paper-rank {
@@ -197,16 +351,34 @@ st.markdown("""
         color: white;
         padding: 0.3rem 0.8rem;
         border-radius: 20px;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         font-weight: 700;
+        white-space: nowrap;
     }
 
     .paper-grade {
         font-weight: 700;
-        font-size: 1.1rem;
+        font-size: 1rem;
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        white-space: nowrap;
+    }
+
+    /* Tablet and desktop paper header */
+    @media (min-width: 768px) {
+        .paper-header {
+            margin-bottom: 1rem;
+            flex-wrap: nowrap;
+        }
+
+        .paper-rank {
+            font-size: 0.85rem;
+        }
+
+        .paper-grade {
+            font-size: 1.1rem;
+        }
     }
 
     .quality-summary {
@@ -253,49 +425,100 @@ st.markdown("""
         margin-top: 0.5rem;
     }
 
-    /* Enhanced Gap Analysis Cards */
+    /* ===== ENHANCED GAP ANALYSIS CARDS - RESPONSIVE ===== */
+
+    /* Mobile-first enhanced gap cards */
     .enhanced-gap-card {
         background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%);
-        padding: 1.8rem;
-        border-radius: 15px;
+        padding: 1.2rem;
+        border-radius: 12px;
         border: 2px solid #fbbf24;
-        margin: 1.2rem 0;
+        margin: 1rem 0;
         position: relative;
         overflow: hidden;
         transition: all 0.3s;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .enhanced-gap-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(251, 191, 36, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(251, 191, 36, 0.2);
     }
 
+    /* Tablet styles for enhanced gap cards */
+    @media (min-width: 768px) {
+        .enhanced-gap-card {
+            padding: 1.5rem;
+            margin: 1.2rem 0;
+            border-radius: 15px;
+        }
+
+        .enhanced-gap-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.2);
+        }
+    }
+
+    /* Desktop styles for enhanced gap cards */
+    @media (min-width: 1024px) {
+        .enhanced-gap-card {
+            padding: 1.8rem;
+        }
+    }
+
+    /* Gap header - responsive */
     .gap-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1rem;
-        padding-bottom: 0.8rem;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.6rem;
         border-bottom: 2px solid #fbbf24;
+        flex-wrap: wrap;
+        gap: 0.5rem;
     }
 
     .gap-type {
         background: #f59e0b;
         color: white;
-        padding: 0.4rem 1rem;
-        border-radius: 25px;
-        font-size: 0.9rem;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
         font-weight: 700;
         display: inline-block;
+        white-space: nowrap;
     }
 
     .gap-priority {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
         color: #92400e;
         font-weight: 600;
         background: rgba(255, 255, 255, 0.7);
-        padding: 0.3rem 0.8rem;
-        border-radius: 15px;
+        padding: 0.25rem 0.6rem;
+        border-radius: 12px;
+        white-space: nowrap;
+    }
+
+    /* Tablet and desktop gap header */
+    @media (min-width: 768px) {
+        .gap-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            flex-wrap: nowrap;
+        }
+
+        .gap-type {
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+
+        .gap-priority {
+            font-size: 0.85rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+        }
     }
 
     /* Legacy gap card for backward compatibility */
@@ -336,11 +559,14 @@ st.markdown("""
         font-size: 0.9rem;
     }
 
-    /* Enhanced chat input styling */
+    /* ===== TOUCH-FRIENDLY INPUT AND BUTTON STYLING ===== */
+
+    /* Enhanced chat input styling - Mobile first */
     .stChatInput {
-        border-radius: 15px;
+        border-radius: 12px;
         border: 2px solid #e5e7eb;
         transition: all 0.3s;
+        min-height: 44px; /* iOS minimum touch target */
     }
 
     .stChatInput:focus-within {
@@ -350,8 +576,10 @@ st.markdown("""
 
     .stChatInput textarea {
         border: none !important;
-        font-size: 1rem;
+        font-size: 16px !important; /* Prevents zoom on iOS */
         line-height: 1.5;
+        min-height: 44px !important;
+        padding: 12px !important;
     }
 
     .stChatInput button {
@@ -359,28 +587,61 @@ st.markdown("""
         border: none !important;
         border-radius: 10px !important;
         transition: all 0.3s !important;
+        min-width: 44px !important; /* iOS minimum touch target */
+        min-height: 44px !important;
+        padding: 12px !important;
     }
 
     .stChatInput button:hover {
         transform: translateY(-1px) !important;
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
     }
-    
-    /* Button styling */
+
+    /* Button styling - Touch-friendly */
     .stButton > button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         border: none;
         border-radius: 10px;
-        padding: 0.6rem 1.2rem;
+        padding: 12px 16px; /* Increased for better touch targets */
         font-weight: 600;
         transition: all 0.3s;
         text-transform: none;
+        min-height: 44px; /* iOS minimum touch target */
+        min-width: 44px;
+        font-size: 14px;
+        line-height: 1.4;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(102, 126, 234, 0.2);
     }
-    
+
     .stButton > button:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .stButton > button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Tablet and desktop button improvements */
+    @media (min-width: 768px) {
+        .stChatInput textarea {
+            font-size: 1rem !important;
+        }
+
+        .stButton > button {
+            padding: 0.8rem 1.4rem;
+            font-size: 15px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .stButton > button {
+            padding: 0.9rem 1.6rem;
+            font-size: 16px;
+        }
     }
     
     /* Loading animation */
@@ -436,15 +697,140 @@ st.markdown("""
         display: inline-block;
         margin: 0.2rem;
     }
-    
+
     .provider-active {
         background: #10b981;
         color: white;
     }
-    
+
     .provider-inactive {
         background: #ef4444;
         color: white;
+    }
+
+    /* ===== RESPONSIVE SIDEBAR STYLING ===== */
+
+    /* Mobile sidebar adjustments */
+    .css-1d391kg { /* Streamlit sidebar container */
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+
+    /* Sidebar content spacing for mobile */
+    .css-1d391kg .stMarkdown {
+        margin-bottom: 0.5rem;
+    }
+
+    .css-1d391kg .stButton {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Sidebar columns for mobile - stack vertically */
+    .css-1d391kg .row-widget {
+        flex-direction: column;
+    }
+
+    .css-1d391kg .row-widget > div {
+        width: 100% !important;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Tablet sidebar improvements */
+    @media (min-width: 768px) {
+        .css-1d391kg {
+            width: 300px !important;
+            min-width: 300px !important;
+        }
+
+        .css-1d391kg .row-widget {
+            flex-direction: row;
+        }
+
+        .css-1d391kg .row-widget > div {
+            width: 48% !important;
+            margin-right: 4%;
+            margin-bottom: 0.8rem;
+        }
+
+        .css-1d391kg .row-widget > div:last-child {
+            margin-right: 0;
+        }
+    }
+
+    /* Desktop sidebar */
+    @media (min-width: 1024px) {
+        .css-1d391kg {
+            width: 320px !important;
+            min-width: 320px !important;
+        }
+
+        .css-1d391kg .stMarkdown {
+            margin-bottom: 1rem;
+        }
+
+        .css-1d391kg .stButton {
+            margin-bottom: 0.8rem;
+        }
+    }
+
+    /* ===== CROSS-BROWSER COMPATIBILITY FIXES ===== */
+
+    /* Firefox specific fixes */
+    @-moz-document url-prefix() {
+        .stButton > button {
+            -moz-appearance: none;
+        }
+
+        .stChatInput textarea {
+            -moz-appearance: none;
+        }
+    }
+
+    /* Safari specific fixes */
+    @supports (-webkit-appearance: none) {
+        .stButton > button {
+            -webkit-appearance: none;
+        }
+
+        .stChatInput textarea {
+            -webkit-appearance: none;
+        }
+
+        /* Fix for Safari touch events */
+        .stButton > button {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+    }
+
+    /* Edge/IE specific fixes */
+    @supports (-ms-ime-align: auto) {
+        .stButton > button {
+            border: none;
+        }
+    }
+
+    /* General cross-browser button fixes */
+    .stButton > button {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    /* Ensure consistent box-sizing across browsers */
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    /* Fix for Windows high DPI displays */
+    @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+        .main-header h1 {
+            font-weight: 600; /* Slightly lighter for high DPI */
+        }
+
+        .stButton > button {
+            font-weight: 500;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
