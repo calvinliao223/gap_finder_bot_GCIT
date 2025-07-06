@@ -194,6 +194,7 @@ st.markdown("""
         transition: all 0.2s;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        color: #1f2937; /* Dark text for readability */
     }
 
     .chat-message:hover {
@@ -204,12 +205,117 @@ st.markdown("""
         border-left-color: #3b82f6;
         background: linear-gradient(to right, #f0f9ff, #ffffff);
         margin-left: 0.5rem;
+        color: #1e293b; /* Slightly darker for user messages */
     }
 
     .assistant-message {
         border-left-color: #059669;
         background: linear-gradient(to right, #f0fdf4, #ffffff);
         margin-right: 0.5rem;
+        color: #1f2937; /* Dark text for assistant messages */
+    }
+
+    /* Message content styling */
+    .chat-message .message-content {
+        color: inherit;
+        line-height: 1.6;
+    }
+
+    .chat-message .message-content h1,
+    .chat-message .message-content h2,
+    .chat-message .message-content h3,
+    .chat-message .message-content h4,
+    .chat-message .message-content h5,
+    .chat-message .message-content h6 {
+        color: #111827; /* Darker for headings */
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .chat-message .message-content p {
+        color: inherit;
+        margin-bottom: 0.8rem;
+    }
+
+    .chat-message .message-content strong,
+    .chat-message .message-content b {
+        color: #111827; /* Darker for bold text */
+        font-weight: 600;
+    }
+
+    .chat-message .message-content em,
+    .chat-message .message-content i {
+        color: #374151; /* Slightly lighter for italic */
+    }
+
+    .chat-message .message-content ul,
+    .chat-message .message-content ol {
+        color: inherit;
+        padding-left: 1.5rem;
+    }
+
+    .chat-message .message-content li {
+        color: inherit;
+        margin-bottom: 0.3rem;
+    }
+
+    .chat-message .message-timestamp {
+        color: #6b7280;
+        font-size: 0.75rem;
+        margin-top: 0.5rem;
+        text-align: right;
+        opacity: 0.7;
+    }
+
+    /* Additional text color fixes for all content in chat messages */
+    .chat-message * {
+        color: inherit !important;
+    }
+
+    .chat-message h1, .chat-message h2, .chat-message h3,
+    .chat-message h4, .chat-message h5, .chat-message h6 {
+        color: #111827 !important;
+    }
+
+    .chat-message strong, .chat-message b {
+        color: #111827 !important;
+    }
+
+    .chat-message em, .chat-message i {
+        color: #374151 !important;
+    }
+
+    .chat-message a {
+        color: #2563eb !important;
+        text-decoration: underline;
+    }
+
+    .chat-message a:hover {
+        color: #1d4ed8 !important;
+    }
+
+    .chat-message code {
+        background: #f3f4f6;
+        color: #1f2937 !important;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    }
+
+    .chat-message pre {
+        background: #f3f4f6;
+        color: #1f2937 !important;
+        padding: 1rem;
+        border-radius: 6px;
+        overflow-x: auto;
+    }
+
+    .chat-message blockquote {
+        border-left: 4px solid #d1d5db;
+        padding-left: 1rem;
+        margin: 1rem 0;
+        color: #6b7280 !important;
+        font-style: italic;
     }
 
     /* Tablet styles for chat messages */
@@ -260,16 +366,20 @@ st.markdown("""
 
     .paper-title {
         font-weight: 600;
-        color: #1e293b;
+        color: #1e293b !important; /* Force dark color for titles */
         font-size: 1rem;
         margin-bottom: 0.5rem;
         line-height: 1.4;
     }
 
     .paper-metadata {
-        color: #64748b;
+        color: #64748b !important; /* Force gray color for metadata */
         font-size: 0.85rem;
         line-height: 1.6;
+    }
+
+    .paper-metadata strong {
+        color: #374151 !important; /* Darker for bold metadata labels */
     }
 
     /* Tablet styles for paper cards */
@@ -311,12 +421,26 @@ st.markdown("""
         box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         word-wrap: break-word;
         overflow-wrap: break-word;
+        color: #1f2937 !important; /* Ensure dark text */
     }
 
     .enhanced-paper-card:hover {
         border-color: #667eea;
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
         transform: translateY(-2px);
+    }
+
+    /* Enhanced paper card text elements */
+    .enhanced-paper-card .paper-title {
+        color: #1e293b !important;
+    }
+
+    .enhanced-paper-card .paper-metadata {
+        color: #64748b !important;
+    }
+
+    .enhanced-paper-card .paper-metadata strong {
+        color: #374151 !important;
     }
 
     /* Tablet styles for enhanced paper cards */
@@ -400,6 +524,19 @@ st.markdown("""
         margin: 1rem 0;
         transition: all 0.3s;
         box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        color: #1f2937 !important; /* Ensure dark text */
+    }
+
+    .graded-paper-card .paper-title {
+        color: #1e293b !important;
+    }
+
+    .graded-paper-card .paper-metadata {
+        color: #64748b !important;
+    }
+
+    .graded-paper-card .paper-metadata strong {
+        color: #374151 !important;
     }
 
     .grade-breakdown {
@@ -408,10 +545,16 @@ st.markdown("""
         border-radius: 8px;
         margin: 1rem 0;
         font-size: 0.9rem;
+        color: #1f2937 !important; /* Dark text for grade breakdown */
+    }
+
+    .grade-breakdown ul,
+    .grade-breakdown li {
+        color: #1f2937 !important;
     }
 
     .grade-explanation {
-        color: #475569;
+        color: #475569 !important;
         font-style: italic;
         margin-top: 0.8rem;
         padding: 0.8rem;
@@ -420,7 +563,7 @@ st.markdown("""
     }
 
     .strengths {
-        color: #059669;
+        color: #059669 !important;
         font-size: 0.9rem;
         margin-top: 0.5rem;
     }
@@ -439,11 +582,37 @@ st.markdown("""
         transition: all 0.3s;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        color: #1f2937 !important; /* Ensure dark text on yellow background */
     }
 
     .enhanced-gap-card:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(251, 191, 36, 0.2);
+    }
+
+    /* Enhanced gap card text elements */
+    .enhanced-gap-card h1,
+    .enhanced-gap-card h2,
+    .enhanced-gap-card h3,
+    .enhanced-gap-card h4,
+    .enhanced-gap-card h5,
+    .enhanced-gap-card h6 {
+        color: #111827 !important; /* Dark headings */
+    }
+
+    .enhanced-gap-card p {
+        color: #1f2937 !important; /* Dark paragraph text */
+    }
+
+    .enhanced-gap-card strong,
+    .enhanced-gap-card b {
+        color: #111827 !important; /* Darker bold text */
+    }
+
+    .enhanced-gap-card ul,
+    .enhanced-gap-card ol,
+    .enhanced-gap-card li {
+        color: #1f2937 !important; /* Dark list text */
     }
 
     /* Tablet styles for enhanced gap cards */
